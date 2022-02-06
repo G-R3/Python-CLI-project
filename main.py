@@ -11,7 +11,7 @@ def printTable(data):
 
 def sortMoviesByQuery(query):
     try:
-        with open("../movies.txt", "r") as file:
+        with open("./movies.txt", "r") as file:
             moviesList = [line.split() for line in file]
 
             # for movie in moviesList: 
@@ -38,12 +38,8 @@ def sortMoviesByQuery(query):
 def viewAllMovies():
     try:
         lines = []
-        with open("../movies.txt", "r") as file:
-            lines = file.readlines()
-            moviesList = []
-            for line in lines:
-                print(type(line))
-                moviesList.append(line.split())
+        with open("./movies.txt", "r") as file:
+            moviesList = [line.split() for line in file]
         
             print("\nViewing all records (unsorted)")
             printTable(moviesList)
@@ -61,7 +57,7 @@ while(True):
         print("<❌> You must enter a valid message!")
 
     if(msg == "exit"):
-        print("Goodbye!")
+        print("👋 Goodbye!")
         break
     elif(msg == "help"):
         print("\n{:<10} {:<5} ".format("COMMAND", "DESCRIPTION"))
