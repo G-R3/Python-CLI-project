@@ -1,3 +1,14 @@
+def printTable(data):
+    print("==========================================================================")
+    print("{:<15} {:<10} {:<10} {:<30} {:<10}".format("Id", "Views", "Rating", "Title", "Year"))
+    print("==========================================================================")
+
+    for value in data:
+        id, views, rating, title, year = value
+        print("{:<15} {:<10} {:<10} {:<30} {:<10}".format(id, views, rating, title, year))
+
+    print("\n<✔> Operation Completed!\n")
+
 def sortMoviesByQuery(query):
     try:
         with open("../movies.txt", "r") as file:
