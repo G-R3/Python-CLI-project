@@ -1,13 +1,26 @@
 def sortMoviesByQuery(query):
     try:
-        lines = []
         with open("../movies.txt", "r") as file:
-            lines = file.readlines()
-        
-        for line in lines:
-            print(line)
+            moviesList = [line.split() for line in file]
+
+            # for movie in moviesList: 
+            #     data.append({
+            #         "id": movie[0],
+            #         "views": movie[1],
+            #         "rating": movie[2],
+            #         "name": movie[3],
+            #         "year": movie[4]
+            #     })
+
+            if(query == "rating"):
+                printTable(sorted(moviesList, key=lambda movie: float(movie[2]), reverse=True))
+            elif(query == "year"):
+                printTable(sorted(moviesList, key=lambda movie: int(movie[4]), reverse=True))
+            elif(query == "views"):
+                printTable(sorted(moviesList, key=lambda movie: int(movie[1]), reverse=True))
+       
     except BaseException as err:
-        print(f"Error reading file: {err}")
+        print(f"<❌> ERROR: {err}")
 
 
 def viewAllMovies():
@@ -20,13 +33,8 @@ def viewAllMovies():
                 print(type(line))
                 moviesList.append(line.split())
         
-            print("==========================================================================")
-            print("{:<15} {:<10} {:<10} {:<30} {:<10}".format("Id", "Views", "Rating", "Title", "Year"))
-            print("==========================================================================")
-            for movie in moviesList:
-                id, views, rating, title, year = movie
-                print("{:<15} {:<10} {:<10} {:<30} {:<10}".format(id, views, rating, title, year))
-            print("\n<✔> Operation Completed!\n")
+            printTable(moviesList)
+          
     except BaseException as err:
         print(f"Error reading file: {err}")
 
