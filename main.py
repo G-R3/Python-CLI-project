@@ -31,7 +31,8 @@ def sortMoviesByQuery(query):
                 printTable(sorted(moviesList, key=lambda movie: int(movie[1]), reverse=True))
        
     except BaseException as err:
-        print(f"<❌> ERROR: {err}")
+        print(f"\n<❌> ERROR reading file: {err}")
+        print("Type 'help' for a list of commands\n")
 
 
 def viewAllMovies():
@@ -44,18 +45,17 @@ def viewAllMovies():
                 print(type(line))
                 moviesList.append(line.split())
         
+            print("\nViewing all records (unsorted)")
             printTable(moviesList)
           
     except BaseException as err:
-        print(f"Error reading file: {err}")
+        print(f"\n<❌> ERROR reading file: {err}")
+        print("Type 'help' for a list of commands\n")
 
 
+print("👋 Type 'help' for a list of commands")
 while(True):
-    print("===========================",
-        "Query: query, View: view, Exit: exit",
-        "===========================", sep="\n")
-
-    msg = input("<❔> What would you like to do?  ").strip()
+    msg = input("<❔> What would you like to do? ").strip()
 
     if not msg:
         print("<❌> You must enter a valid message!")
@@ -63,13 +63,19 @@ while(True):
     if(msg == "exit"):
         print("Goodbye!")
         break
+    elif(msg == "help"):
+        print("\n{:<10} {:<5} ".format("COMMAND", "DESCRIPTION"))
+        print("{:<10} {:<5} ".format("view", "View all movies(unsorted)"))
+        print("{:<10} {:<5} ".format("query", "Sort movies by rating, year, or views"))
+        print("{:<10} {:<5} ".format("exit", "Terminate the program\n"))
     elif msg == "query":
         print("==========================================",
-            "Rating: rating, Year: year, Views: views", "==========================================", sep="\n")
+            "Rating: rating, Year: year, Views: views", 
+            "==========================================", sep="\n")
 
         query = input("<❔> How would you like to query records? ")
         sortMoviesByQuery(query)
     elif msg == "view":
-        print("\nViewing all records (unsorted)")
         viewAllMovies()
-
+    else:
+        print("\n<❌> Command does not exist type 'help' to see a list of valid commands 💥\n")
