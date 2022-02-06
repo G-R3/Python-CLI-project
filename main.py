@@ -15,15 +15,16 @@ def viewAllMovies():
         lines = []
         with open("../movies.txt", "r") as file:
             lines = file.readlines()
-            result = []
+            moviesList = []
             for line in lines:
-                result.append(line.split())
+                print(type(line))
+                moviesList.append(line.split())
         
             print("==========================================================================")
             print("{:<15} {:<10} {:<10} {:<30} {:<10}".format("Id", "Views", "Rating", "Title", "Year"))
             print("==========================================================================")
-            for item in result:
-                id, views, rating, title, year = item
+            for movie in moviesList:
+                id, views, rating, title, year = movie
                 print("{:<15} {:<10} {:<10} {:<30} {:<10}".format(id, views, rating, title, year))
             print("\n<✔> Operation Completed!\n")
     except BaseException as err:
