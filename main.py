@@ -19,12 +19,13 @@ def viewAllMovies():
             for line in lines:
                 result.append(line.split())
         
-            print("=====================================================================")
-            print("{:<15} {:<10} {:<10} {:<25} {:<10}".format("Id", "Views", "Rating", "Title", "Year"))
-            print("=====================================================================")
+            print("==========================================================================")
+            print("{:<15} {:<10} {:<10} {:<30} {:<10}".format("Id", "Views", "Rating", "Title", "Year"))
+            print("==========================================================================")
             for item in result:
                 id, views, rating, title, year = item
-                print("{:<15} {:<10} {:<10} {:<25} {:<10}".format(id, views, rating, title, year))
+                print("{:<15} {:<10} {:<10} {:<30} {:<10}".format(id, views, rating, title, year))
+            print("\n<✔> Operation Completed!\n")
     except BaseException as err:
         print(f"Error reading file: {err}")
 
@@ -34,10 +35,10 @@ while(True):
         "Query: query, View: view, Exit: exit",
         "===========================", sep="\n")
 
-    msg = input("What would you like to do? ")
+    msg = input("<❔> What would you like to do?  ").strip()
 
-    if not msg or not msg.strip():
-        print("You must enter a msg")
+    if not msg:
+        print("<❌> You must enter a valid message!")
 
     if(msg == "exit"):
         print("Goodbye!")
@@ -46,9 +47,9 @@ while(True):
         print("==========================================",
             "Rating: rating, Year: year, Views: views", "==========================================", sep="\n")
 
-        query = input("How would you like to query records? ")
+        query = input("<❔> How would you like to query records? ")
         sortMoviesByQuery(query)
     elif msg == "view":
-        print("Viewing all records (unsorted)")
+        print("\nViewing all records (unsorted)")
         viewAllMovies()
 
