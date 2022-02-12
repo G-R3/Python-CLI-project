@@ -36,10 +36,24 @@ def sortMoviesByQuery(query):
 
 def searchMoviesByYear(match):
     try:
-        with open("./movies.txt", "r") as file:            
-            moviesList = [line.split() for line in  file if match in line]
-       
-            printTable(sorted(moviesList, key=lambda movie: float(movie[2]), reverse=True))
+        with open("./movies.txt", "r") as file:          
+            moviesList = [line.split() for line in  file]
+
+           
+            movies = []
+            for movie in moviesList:
+                if movie[len(movie) - 1] == match:
+                    movies.append(movie)
+
+            printTable(movies)
+
+            # some bug with this approach. If we input 2000, we get a movie from 1982 because the ID contains 2000
+            # moviesList = [line.split() for line in  file if match in line]
+            # if not moviesList:
+            #     print(f"\nNo movies found for year: {match}\n")
+            #     return
+            # printTable(sorted(moviesList, key=lambda movie: float(movie[2]), reverse=True))
+
     except BaseException as err:
         print(f"\n<❌> ERROR reading file: {err}")
         print("Type 'help' for a list of commands\n")
@@ -82,7 +96,7 @@ while(True):
         query = input("<❔> How would you like to query records? ")
         sortMoviesByQuery(query)
     elif msg == "search":
-        query = input("<❔> Enter the year: ")
+        query = input("<❔> Enter the year to search movie by: ")
         searchMoviesByYear(query)
     elif msg == "view":
         viewAllMovies()
