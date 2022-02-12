@@ -34,7 +34,16 @@ def sortMoviesByQuery(query):
         print(f"\n<❌> ERROR reading file: {err}")
         print("Type 'help' for a list of commands\n")
 
-
+def searchMoviesByYear(match):
+    try:
+        with open("./movies.txt", "r") as file:            
+            moviesList = [line.split() for line in  file if match in line]
+       
+            printTable(sorted(moviesList, key=lambda movie: float(movie[2]), reverse=True))
+    except BaseException as err:
+        print(f"\n<❌> ERROR reading file: {err}")
+        print("Type 'help' for a list of commands\n")
+    
 def viewAllMovies():
     try:
         lines = []
@@ -63,6 +72,7 @@ while(True):
         print("\n{:<10} {:<5} ".format("COMMAND", "DESCRIPTION"))
         print("{:<10} {:<5} ".format("view", "View all movies(unsorted)"))
         print("{:<10} {:<5} ".format("query", "Sort movies by rating, year, or views"))
+        print("{:<10} {:<5} ".format("search", "Search movies by year"))
         print("{:<10} {:<5} ".format("exit", "Terminate the program\n"))
     elif msg == "query":
         print("==========================================",
@@ -71,6 +81,9 @@ while(True):
 
         query = input("<❔> How would you like to query records? ")
         sortMoviesByQuery(query)
+    elif msg == "search":
+        query = input("<❔> Enter the year: ")
+        searchMoviesByYear(query)
     elif msg == "view":
         viewAllMovies()
     else:
